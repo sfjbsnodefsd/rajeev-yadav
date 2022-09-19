@@ -1,0 +1,22 @@
+{
+  "_id": "1002",
+  "cid":"1002",
+  "companyName":"RELAINCE",
+  "FounderName":"AMABANI",
+  "Ested":"1960",
+  "OperateIn":"Gujrat",
+  "b2b":"yes"
+}
+
+ "name":"Rock",
+  "role":"Junior",
+  "class":8,
+  "address":{
+    "city":"Indor",
+    "state":"MP",
+    "zip":"8800678"
+  }
+CMD Commands
+curl http://root:root@localhost:5984/students/_all_docs
+curl http://root:root@localhost:5984/students/_all_docs?include_docs=true
+curl "http://root:root@localhost:5984/students/_all_docs?include_docs=true&key=\"891adb009305852a92af81444b000222\""

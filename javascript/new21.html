@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>  
+  <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'> 
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <link rel="stylesheet" href="new21.css">
+</head>
+<body>
+        <div class="flex-containerMain">
+            <div class="flex-container">
+                <div class="flex-container11">
+                    <!-- <form id="loginForm"> -->
+                    <input type="text" id="fullname" placeholder="Full Name"/>
+                    <label class ="lblError" id="lblfullname">Full Name is required!!</label>
+                    <input type="text" id="email" placeholder="Email"/>
+                    <label class ="lblError" id="lblEmail">Passwordis required!!</label>
+                    <input type="text" id="username" placeholder="username"/>
+                    <label class ="lblError" id="lblUser">User Name is required!!</label>
+                    <input type="password" id="password" placeholder="password"/>
+                    <label class ="lblError" id="lblPass">Passwordis required!!</label>
+                    
+                    <p class="eye" ><label class="fas fa-eye" onclick="show()"></label> </p>
+                    <p class="message" id="messg"></p>
+                    <button type="button" onclick="validateSignUp()">SIGN UP</button>
+                    <p class="" id="loginSucces">SignUp Successfully</p>
+                <!-- </form> -->
+            </div>
+        </div>
+        </div>
+        <script>
+            function show(){
+              var password = document.getElementById("password");
+              var icon = document.querySelector(".fas")
+        
+              // ========== Checking type of password ===========
+              if(password.type === "password"){
+                password.type = "text";
+              }
+              else {
+                password.type = "password";
+              }
+            };
+            // ================== User Form Validation ============
+            function validateSignUp(){
+                // document.getElementById("loginForm").preve
+              var username = document.getElementById("username").value;
+              var pass = document.getElementById("password").value;
+              var email = document.getElementById("email").value;
+              var fullname = document.getElementById("fullname").value;
+              var emailval = /^([A-Za-z0-9_\.\-])+\@(([A-Za-z0-9\-])+\.)+([A-Za-z0-9]{2,4})+$/;
+              var letter = /^[A-Za-z0-9]+$/;
+                hideMsg();
+                hidelblMsg();
+              if(username == '' && pass == '' && email == '' && fullname == '' ){
+                document.getElementById("messg").style.display = 'block';
+                document.getElementById("messg").innerText = "Please Provide SignUp Details!!"
+              }else if(fullname == ''){
+                document.getElementById("lblfullname").style.display = 'block';
+                document.getElementById("lblfullname").innerText = "Please Provide Valid Email!!"
+              }else if(email == ''){
+                document.getElementById("lblEmail").style.display = 'block';
+                document.getElementById("lblEmail").innerText = "Please Provide Valid Email!!"
+              }else if(!emailval.test(email)){
+                document.getElementById("lblEmail").style.display = 'block';
+                document.getElementById("lblEmail").innerText = "Please Provide Valid Email!!"
+              }else if(username == '' ){
+                hideMsg();
+                document.getElementById("lblUser").style.display = 'block';
+                document.getElementById("username").style.margin = '0px';
+              }else if(!letter.test(username)){
+                document.getElementById("lblUser").style.display = 'block';
+                document.getElementById("username").style.margin = '0px';
+                document.getElementById("lblUser").innerText = "Only Alphanumeric UserName Is Allowed!!";
+              }else if(username.length < 5 || username.length > 12){
+                document.getElementById("lblUser").style.display = 'block';
+                document.getElementById("username").style.margin = '0px';
+                document.getElementById("lblUser").innerText = "It Should be between 5 to 12 Char!!";
+              }else if(pass == ''){
+                hideMsg();
+                document.getElementById("lblPass").style.display = 'block';
+                document.getElementById("password").style.margin = '0px';
+              }else{
+                document.getElementById("loginSucces").style.display = 'block';
+                
+              }
+            }
+            function hideMsg(){
+              document.getElementById("messg").style.display = 'none';
+            }
+            function hidelblMsg(){
+              document.getElementById("lblfullname").style.display = 'none';
+              document.getElementById("lblEmail").style.display = 'none';
+              document.getElementById("lblUser").style.display = 'none';
+              document.getElementById("lblPass").style.display = 'none';
+              document.getElementById("password").style.margin = '0 0 15px';
+              document.getElementById("username").style.margin = '0 0 15px';
+            }
+          </script>
+</body>
+</html>

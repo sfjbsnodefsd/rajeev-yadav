@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UserForm</title>
+</head>
+<body>
+    <h1 align="center">Please enter the form below</h1>
+    <table align="center">
+        <tr>
+            <td>Name</td>
+            <td>
+                <input type="text" placeholder="Enter your name" id="name" />
+            </td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>
+                <input type="text" placeholder="Enter your email" id="email" />
+            </td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td>
+                <input type="password" placeholder="Enter your password" id="pass" />
+            </td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td>
+                <input type="password" placeholder="Enter your password" id="cpass" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" onclick="crateAccount()" value="create" />
+            </td>
+        </tr>
+    </table>
+    <script>
+        function crateAccount(){
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let pass = document.getElementById("pass").value;
+            let cpass = document.getElementById("cpass").value;
+        
+        var letter = /^[A-Za-z]+$/;
+        var emailval = /^([A-Za-z0-9_\.\-])+\@(([A-Za-z0-9\-])+\.)+([A-Za-z0-9]{2,4})+$/;
+        if(name == "" || email =="" || pass=="" || cpass ==""){
+            alert("All fields are required");
+        }else if(!letter.test(name)){
+            alert("Name Should conatain Alpabates only");
+        }else if(!emailval.test(email)){
+            alert("Enter Proper Email");
+        }else if(pass != cpass){
+            alert("Pass not matching");
+        }else if(document.getElementById("pass").value.length < 4){
+            alert("Pass minimum 5 char");
+        }else{
+            alert("Acocunt create");
+        }
+    }
+        
+    </script>
+</body>
+</html>

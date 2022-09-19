@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <table>
+            <colgroup>
+                <col style="width: 150px;" />
+            </colgroup>
+            <tfoot>
+                <tr>
+                    <td class="bottom" colspan="4">
+                        <input type="submit" value="Submit" onclick="crateAccount()"/>
+                        <input type="reset" value="clear Form" onclick="clearForm()"/>
+                    </td>
+                </tr>
+            </tfoot>
+            <tbody>
+                <tr>
+                    <td class="right">
+                        <label for="last-name">Last Name</label>
+                    </td>
+                    <td colspan="3">
+                        <input type="text" id="last-name" size="42" value="" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="right">
+                        <label for="first-name">First Name</label>
+                    </td>
+                    <td colspan="3">
+                        <input type="text" id="first-name" size="42" value="" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="right">
+                        <label for="adds">Address</label>
+                    </td>
+                    <td colspan="3">
+                        <textarea rows="2" cols="20" name="adds" id="adds"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="right">
+                        <label for="city">City</label>
+                    </td>
+                    <td >
+                        <input type="text" id="city" size="20" value="" />
+                    </td>
+                    <td class="right">
+                        <label for="state">State</label>
+                    </td>
+                    <td >
+                        <input type="text" id="state" size="6" value="" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="right">
+                        <label for="zip">Zip</label>
+                    </td>
+                    <td colspan="3">
+                        <input type="text" id="zip" size="" value="" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="right">
+                        <label for="ccode">Phone (Country code, Area code, Number)</label>
+                    </td>
+                    <td colspan="3">
+                        (+<input type="text" id="ccode" size="4" value="" />)
+                        <input type="text" id="acode" size="4" value="" />
+                        -<input type="text" id="num" size="10" value="" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="right">
+                        <label for="email">Email</label>
+                    </td>
+                    <td colspan="3">
+                        <input type="text" id="email" size="" value="" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="right">
+                        <label for="m">BirthDate</label>
+                    </td>
+                    <td colspan="3">
+                        Month<input type="text" id="m" size="2" value="" />)
+                        Date<input type="text" id="d" size="2" value="" />
+                        Year<input type="text" id="y" size="4" value="" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="right">
+                        <label for="gen">Gender</label>
+                    </td>
+                    <td colspan="3">
+                       <select id="gen">
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                       </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="right">
+                        <label for="spring">Starting date</label>
+                    </td>
+                    <td colspan="3">
+                       <input type="radio" id="spring" name="spring">Spring 2006
+                       <input type="radio" id="summer" name="summer">Summer 2006
+                    </td>
+                </tr>
+                <tr>
+                    <td class="right">
+                        <label for="Comment">Comment</label>
+                    </td>
+                    <td colspan="3">
+                        <textarea rows="5" cols="30" id="Comment" name="Comment"></textarea>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script>
+            function crateAccount(){
+                let lname = document.getElementById("last-name").value;
+                let fname = document.getElementById("first-name").value;
+                let adds = document.getElementById("adds").value;
+                let city = document.getElementById("city").value;
+                let state = document.getElementById("state").value;
+                let zip = document.getElementById("zip").value;
+                let ccode = document.getElementById("ccode").value;
+                let email = document.getElementById("email").value;
+                let y = document.getElementById("y").value;
+                let m = document.getElementById("m").value;
+                let d = document.getElementById("d").value;
+                let spring = document.getElementById("spring").value;
+                let summer = document.getElementById("summer").value;
+            
+            var letter = /^[A-Za-z]+$/;
+            var num = /^[0-9]+$/;
+            var emailval = /^([A-Za-z0-9_\.\-])+\@(([A-Za-z0-9\-])+\.)+([A-Za-z0-9]{2,4})+$/;
+            if(lname == "" || email =="" || y ==""){
+                alert("Name, Email, Birth Year are Madatory");
+            }else if(lname != '' && !letter.test(lname)){
+                alert("Last Name Should conatain Alpabates only");
+            }else if(fname != '' && !letter.test(fname)){
+                alert("First Name Should conatain Alpabates only");
+            }else if(!emailval.test(email)){
+                alert("Enter Proper Email");
+            }else if(!num.test(y) && !y.value.length == 4 ){
+                alert("Year in YYYY format");
+            }else if(!num.test(m) && !m.value.length == 2 ){
+                alert("Year in MM format");
+            }else if(!num.test(d) && !d.value.length == 2 ){
+                alert("Year in DD format");
+            }else{
+                alert("Acocunt create");
+            }
+        }
+            
+        </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+h1{
+    background-color: skyblue;
+    text-align: center;
+    
+}
+body{
+    /* background-image: url("bike.webp"); */
+    margin-left: 100px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+p.none {border-style: none;}
+p.dotted {border-style: dotted;border-width: 5px;}
+p.dashed {border-style: dashed;border-width: medium;}
+p.solid {border-style: solid;border-color: aquamarine;}
+.solid1 {border-style: solid;border-color: aquamarine;}
+p.double {
+    border-color: blue;
+    border-style: double;
+    border-radius: 5px;
+    font-size: 500;
+    font-family: 'Courier New', Courier, monospace;
+    color:red
+}
+p.groove {border-style: groove;}
+.flex-container{
+    display: flex;
+    display: -webkit-flex;
+    width: 600px;
+    height: 210px;
+    background-color: brown;
+}
+.flex-item{
+    width: 200px;
+    height: 100px;
+    background-color: blueviolet;
+}
