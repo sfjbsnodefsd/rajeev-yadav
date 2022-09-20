@@ -1,6 +1,5 @@
 console.log("hello World!")
 const http = require("http");
-const { json } = require("stream/consumers");
 http.createServer((req,res)=>{
     res.writeHead(200,{'content-type':'application/json'});
     res.write(JSON.stringify({
