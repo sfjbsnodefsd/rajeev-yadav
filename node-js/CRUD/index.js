@@ -34,8 +34,8 @@ app.get('/emp', (req, res) => {
 //Get Emp by id 
 app.get("/emp/:id", (req, res) => {
     var empId = req.params.id;
-    let selQry = `Select * from ${tableName} where emp_id = ${empId}`
-    conn.query(selQry, (err, results, fieilds) => {
+    let selQry = `Select * from ${tableName} where emp_id = ?`
+    conn.query(selQry, [empId] ,(err, results, fieilds) => {
         if (err) {
             res.send(err)
         } else {
@@ -76,6 +76,33 @@ app.post('/emp', (req, res) => {
                 res.send({ "Error": "Error in insertion" })
             }
             
+        }
+    })
+})
+app.delete('/emp/:id',(req,res) => {
+    var empId = req.params.id;
+    let selQry = `Delete from ${tableName} where emp_id = ?`
+    conn.query(selQry, [empId], (err, results, fieilds) => {
+        if (err) {
+            res.send(err)
+        } else {
+            /*
+                {
+                "fieldCount": 0,
+                "affectedRows": 1,
+                "insertId": 0,
+                "serverStatus": 2,
+                "warningCount": 0,
+                "message": "",
+                "protocol41": true,
+                "changedRows": 0
+            }
+            */
+            if(results.affectedRows == 1){
+                res.send({ "Success": "Record deleted successfully" });
+            }else{
+                res.send({ "Error": "Error in insertion" })
+            }
         }
     })
 })
