@@ -9,7 +9,8 @@ const conn = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'root',
-    database: 'employeedb'
+    database: 'employeedb',
+    multipleStatements :true
 })
 conn.connect((err) => {
     if (!err) {
@@ -79,6 +80,7 @@ app.post('/emp', (req, res) => {
         }
     })
 })
+//Delete Emp
 app.delete('/emp/:id',(req,res) => {
     var empId = req.params.id;
     let selQry = `Delete from ${tableName} where emp_id = ?`
@@ -103,6 +105,24 @@ app.delete('/emp/:id',(req,res) => {
             }else{
                 res.send({ "Error": "Error in insertion" })
             }
+        }
+    })
+})
+//Insert usign SP
+app.post('/emp_storeprocedure', (req, res) => {
+    let emp= req.body;
+    let insertQry = "SET  @emp_id = ?; SET @emp_name = ?;SET @emp_code = ?;SET @emp_sal = ?; \
+    call empAddEdit(@emp_id,@emp_name,@emp_code,@emp_sal)";
+    conn.query(insertQry, [emp.emp_id, emp.emp_name,emp.emp_code,emp.emp_sal],(err, results) => {
+        if (err) {
+            res.send(err)
+        } else {
+            if(results){
+                res.send({ "Success": "Record inserted successfully through Store Procedure" });
+            }else{
+                res.send({ "Error": "Error in insertion" })
+            }
+            
         }
     })
 })
