@@ -118,11 +118,28 @@ app.post('/emp_storeprocedure', (req, res) => {
             res.send(err)
         } else {
             if(results){
-                res.send({ "Success": "Record inserted successfully through Store Procedure" });
+                results.forEach(element => {
+                    if(element.construtor == Array){
+                        res.send({ "Success": "Employee added with Id "+element[0].emp_id });
+                    }
+                });
             }else{
                 res.send({ "Error": "Error in insertion" })
             }
             
+        }
+    })
+})
+//Update using SP
+app.put('/emp_storeprocedure', (req, res) => {
+    let emp= req.body;
+    let insertQry = "SET  @emp_id = ?; SET @emp_name = ?;SET @emp_code = ?;SET @emp_sal = ?; \
+    call empAddEdit(@emp_id,@emp_name,@emp_code,@emp_sal)";
+    conn.query(insertQry, [emp.emp_id, emp.emp_name,emp.emp_code,emp.emp_sal],(err, results) => {
+        if (err) {
+            res.send(err)
+        } else {
+                res.send({ "Success": "Employee updated successfully " });
         }
     })
 })
