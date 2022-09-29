@@ -30,7 +30,6 @@ module.exports = {
                 if(error){
                     return callback(error)
                 }
-                console.log(results);
                 return callback(null, results)
             }
         )
@@ -43,7 +42,6 @@ module.exports = {
                 if(error){
                     return callback(error);
                 }
-                console.log(results);
                 return callback(null, results)
             }
         )
@@ -63,7 +61,6 @@ module.exports = {
                 if(error){
                     return callback(error);
                 }
-                console.log(results);
                 return callback(null, results[0])
             }
         )
@@ -76,9 +73,20 @@ module.exports = {
                 if(error){
                     return callback(error)
                 }
-                console.log(result);
                 return callback(null, result[0])
             }
         )
-    }
+    },
+    getUserByUserEmail: (email, callBack) => {
+        pool.query(
+          `select * from registration where email = ?`,
+          [email],
+          (error, results, fileds) => {
+            console.log(error)
+            if(error) {
+             return callBack(error)
+            } return callBack(null, results[0]);
+          }
+        )
+      }
 }

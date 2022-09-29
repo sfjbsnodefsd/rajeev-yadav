@@ -1,7 +1,7 @@
 const { hashSync } = require("bcrypt")
-const { create, getUser, getUserById, deleteUser, updateUser } = require("./user.service")
-const { genSaltSync } = require("bcrypt")
-
+const { create, getUser, getUserById, deleteUser, updateUser, getUserByUserEmail } = require("./user.service")
+const { genSaltSync,compareSync } = require("bcrypt")
+const {sign} = require("jsonwebtoken")
 module.exports = {
     createuser: (req, res) => {
         const body = req.body;
@@ -31,7 +31,6 @@ module.exports = {
                     message: "database connection error",
                 });
             }
-            console.log(results);
             return res.status(200).json({
                 success: 1,
                 data: results,
@@ -59,8 +58,6 @@ module.exports = {
     },
     updateuser: (req, res) => {
         const body = req.body;
-        console.log(body);
-        body.id  = req.params.id;
         updateUser(body, (err, results) => {
             if (err) {
                 console.log(err);
@@ -84,5 +81,37 @@ module.exports = {
                 message : "User deleted succesfully"
             })
         })
-    }
+    },
+    login: (req, res) => {
+        const body = req.body;
+        console.log(body)
+        getUserByUserEmail(body.email, (err, results) => {
+          if (err) {
+            console.log(err);
+          }
+          if (!results) {
+            return res.json({
+              sucess: 0,
+              message: "Invalid email or password",
+            });
+          }
+          const result = compareSync(body.password, results.password);
+          if (result) {
+            results.password = undefined;
+            const jsontoken = sign({ result: results }, process.env.KEY, {
+              expiresIn: "1h",
+            });
+            return res.json({
+              sucess:1,
+              message:"Login sucessfully ",
+              token: jsontoken
+            });
+          } else  {
+            return res.json({
+              success : 0 ,
+              data:"Invalid email or password"
+            })
+          }
+        });
+      },
 };
