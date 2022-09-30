@@ -32,12 +32,13 @@ app.post("/auth/reg", async (req, res) => {
             message: "User already exist",
         });
     } else {
-        const newuser = new User({
+        const newUser = new User({
             name,
             email,
             password,
         });
-        newuser.Save();
+        newUser.save();
+        return res.json(newUser);
     }
 });
 
