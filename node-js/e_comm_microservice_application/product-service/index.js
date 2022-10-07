@@ -12,6 +12,7 @@ const isAuth = require("../isAuthenicated");
 const product = require("./product");
 
 var channel, connection;
+var order;
 
 const port = process.env.PORT || 5001;
 
@@ -51,14 +52,22 @@ app.post("/product/create", isAuth, async (req, res) => {
     return res.status(201).send(newProd);
 });
 
-app.post("product/buy", isAuth, async (req, res) => {
-    cosnt[ids] = req.body;
-    const products = await Product.find(_id, { $in: ids });
-
+app.post("/product/buy", isAuth, async (req, res) => {
+    const { ids } = req.body;
+    console.log(ids);
+    const products = await Product.find({ _id: { $in: ids } });
+    // console.log(products);
     channel.sendToQueue(
         "ORDER",
         Buffer.from(JSON.stringify({ products, userEmail: req.user.email }))
     );
+    channel.consume("PRODUCT", (data) => {
+        console.log("consuming product queue");
+        // console.log(data);
+        order = JSON.parse(data.content);
+        channel.ack(data);
+    });
+    return res.json(order);
 });
 
 app.listen(port, () => {
