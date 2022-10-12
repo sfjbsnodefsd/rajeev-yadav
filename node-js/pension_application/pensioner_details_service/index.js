@@ -22,7 +22,7 @@ mongoose.connect(
         }
     }
 );
-app.post("/pensioner/", async (req, res) => {
+app.post("/pensioner/", isAuth, async (req, res) => {
     try {
         const {
             p_name,
@@ -64,7 +64,7 @@ app.get("/pensioner/:aadhar", isAuth, async (req, res) => {
             console.log("Error : Get details - No Data Found!");
             res.status(200).send({ success: 0, data: "NULL" });
         } else {
-            res.status(200).send({ success: 0, data: details });
+            res.status(200).send({ success: 1, data: details });
         }
     } catch (err) {
         console.log("Error : Get details", err);
