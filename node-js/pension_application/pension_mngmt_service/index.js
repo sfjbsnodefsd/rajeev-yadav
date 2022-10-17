@@ -77,10 +77,10 @@ app.post("/mngmt/get_pensioner_details", isAuth, async (req, res) => {
 });
 app.post("/mngmt/process_pension", isAuth, async (req, res) => {
     try {
-        const aadhar = parseInt(req.aadhar);
+        const aadhar = req.aadhar;
         const token = req.headers["authorization"];
-        console.log(aadhar);
-        console.log(token);
+        // console.log(aadhar);
+        // console.log(token);
 
         const args = {
             headers: {
