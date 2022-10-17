@@ -1,0 +1,19 @@
+{
+    "name": "pension_mngmt_service",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "nodemon index.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "dotenv": "^16.0.3",
+        "express": "^4.18.2",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^6.6.5",
+        "node-rest-client": "^3.1.1",
+        "nodemon": "^2.0.20"
+    }
+}
