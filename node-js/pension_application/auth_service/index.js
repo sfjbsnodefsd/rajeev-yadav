@@ -28,7 +28,7 @@ app.post("/pensioner/get_token", async (req, res) => {
         // console.log(username, password);
         const user = await User.findOne({ username, password });
         if (!user) {
-            console.log("Error :", err);
+            console.log("Error : No Record Found");
             res.status(200).send({ success: 0, message: "NULL" });
         } else {
             // console.log(user);
@@ -38,9 +38,9 @@ app.post("/pensioner/get_token", async (req, res) => {
                     message: "Incorect password",
                 });
             }
-
+            const aadhar = user.aadhar;
             jwt.sign(
-                { username, password },
+                { username, password, aadhar },
                 process.env.SECRET,
                 {
                     expiresIn: "1800s",

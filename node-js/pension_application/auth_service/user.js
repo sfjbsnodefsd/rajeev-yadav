@@ -12,5 +12,9 @@ const UserSchema = new mongoose.Schema({
         require: true,
         type: String,
     },
+    aadhar: {
+        require: true,
+        type: String,
+    },
 });
 module.exports = mongoose.model("User", UserSchema);

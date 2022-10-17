@@ -69,7 +69,7 @@ app.post("/process_pension/", isAuth, async (req, res) => {
         });
     } catch (err) {
         console.log("Error : Process pension", err);
-        res.status(200).send({ success: 0, data: "NULL" });
+        res.status(500).send({ success: 0, data: "NULL" });
     }
 });
 app.listen(port, () => {
