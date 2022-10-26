@@ -1,0 +1,11 @@
+<h2>{{ title }}</h2>
+
+First Name
+<input type="text" placeholder="enter First name" [(ngModel)]="firstName" />
+<br />
+Last Name
+<input type="text" placeholder="enter Last name" [(ngModel)]="lastName" /><br />
+Gender
+<input type="radio" [(ngModel)]="gender" id="male" value="male" /> male
+<input type="radio" [(ngModel)]="gender" id="Female" value="female" /> Female
+<button (click)="save()">Submit</button>
