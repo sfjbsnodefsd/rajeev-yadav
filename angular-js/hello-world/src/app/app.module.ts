@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { UserFormComponent } from './Components/user-form/user-form.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
 import { HomeComponent } from './Components/home/home.component';
+import { RegisterUsersComponent } from './Components/register-users/register-users.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { HomeComponent } from './Components/home/home.component';
     UserFormComponent,
     NavbarComponent,
     HomeComponent,
+    RegisterUsersComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

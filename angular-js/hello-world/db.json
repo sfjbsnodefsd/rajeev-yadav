@@ -1,8 +1,8 @@
 {
   "user": [
     {
-      "firstname": "rajeev",
-      "lastname": "yadav",
+      "firstName": "rajeev",
+      "lastName": "yadav",
       "gender": "male",
       "id": 1
     }

@@ -6,7 +6,7 @@
   >
   <input
     type="text"
-    [(ngModel)]="firstName"
+    [(ngModel)]="user.firstName"
     class="form-control"
     aria-label="Sizing example input"
     aria-describedby="inputGroup-sizing-default"
@@ -16,7 +16,7 @@
   <span class="input-group-text" id="inputGroup-sizing-default">Last Name</span>
   <input
     type="text"
-    [(ngModel)]="lastName"
+    [(ngModel)]="user.lastName"
     class="form-control"
     aria-label="Sizing example input"
     aria-describedby="inputGroup-sizing-default"
@@ -28,7 +28,7 @@
     class="form-check-input"
     type="radio"
     name="flexRadioDefault"
-    [(ngModel)]="gender"
+    [(ngModel)]="user.gender"
     value="male"
     id="flexRadioDefault1"
   />
@@ -39,7 +39,7 @@
     class="form-check-input"
     type="radio"
     name="flexRadioDefault"
-    [(ngModel)]="gender"
+    [(ngModel)]="user.gender"
     value="female"
     id="flexRadioDefault2"
     checked

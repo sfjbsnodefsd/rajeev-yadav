@@ -1,0 +1,26 @@
+<h1
+  style="text-align: center; border-style: groove; border-color: #7959ff"
+  class="display-2"
+>
+  List of Registered Users
+</h1>
+
+<br />
+
+<ul
+  style="margin: 20px; border-color: #7959ff; border-style: double"
+  *ngFor="let u of users; index as i"
+  class="list-group list-group-flush"
+>
+  <li class="list-group-item">
+    <span>firstName: {{ u.firstName }}</span>
+    <span> lastName: {{ u.lastName }}</span>
+    <button
+      (click)="deleteRow(u, i)"
+      type="button"
+      style="color: red; background-color: red"
+      class="btn-close"
+      aria-label="Close"
+    ></button>
+  </li>
+</ul>
