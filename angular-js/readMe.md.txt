@@ -11,3 +11,5 @@ ng g c components
 ng g s services
 
 json-server --watch db.json --port 5000
+
+ng g pipe Pipe/Ellipsis

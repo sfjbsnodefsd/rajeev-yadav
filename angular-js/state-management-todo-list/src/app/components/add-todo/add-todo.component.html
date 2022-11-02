@@ -1,6 +1,13 @@
-<input
-  #todoItem
-  style="align-items: center"
-  placeholder="Enter your todos here "
-/>
-<button (click)="AddTodo(todoItem.value)">Add todo!</button>
+<div>
+  <div id="addtodo">
+    <input
+      class="addtodo"
+      #todoItem
+      style="align-items: center"
+      placeholder="Enter your todos here "
+    />
+  </div>
+  <div id="addtodobtn">
+    <button class="btn" (click)="AddTodo(todoItem.value)">Add todo!</button>
+  </div>
+</div>
