@@ -11,6 +11,7 @@ import { HomeComponent } from './Components/home/home.component';
 import { RegisterUsersComponent } from './Components/register-users/register-users.component';
 import { PipeDemoComponent } from './Components/pipe-demo/pipe-demo.component';
 import { EllipsisPipe } from './Pipes/ellipsis.pipe';
+import { InterpolationDemoComponent } from './Components/interpolation-demo/interpolation-demo.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { EllipsisPipe } from './Pipes/ellipsis.pipe';
     RegisterUsersComponent,
     PipeDemoComponent,
     EllipsisPipe,
+    InterpolationDemoComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],
