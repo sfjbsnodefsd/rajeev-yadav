@@ -71,6 +71,22 @@ app.get("/pensioner/:aadhar", isAuth, async (req, res) => {
         res.status(200).send({ success: 0, data: "NULL" });
     }
 });
+app.get("/pensioner/", isAuth, async (req, res) => {
+    try {
+        const aadhar = req.params.aadhar;
+        console.log(aadhar);
+        const details = await Pensioner_detail.find({});
+        if (!details) {
+            console.log("Error : Get details - No Data Found!");
+            res.status(200).send({ success: 0, data: "NULL" });
+        } else {
+            res.status(200).send({ success: 1, data: details });
+        }
+    } catch (err) {
+        console.log("Error : Get details", err);
+        res.status(200).send({ success: 0, data: "NULL" });
+    }
+});
 app.listen(port, () => {
     console.log(`P Details service is up and runnig on port ${port}`);
 });
