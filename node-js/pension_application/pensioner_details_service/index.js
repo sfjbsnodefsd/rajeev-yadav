@@ -1,13 +1,19 @@
 const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
+const cors = require('cors');
 const Pensioner_detail = require("./pensioner_detail");
 const isAuth = require("../auth_service/isAuth");
 
 const port = process.env.PORT || 6001;
 
 const app = express();
+app.use(express.urlencoded({extended:false}));
 app.use(express.json());
+app.use(cors({
+    origin: "*",
+    methods: 'POST,GET,PUT,OPTIONS,DELETE'
+}));
 
 mongoose.connect(
     process.env.DB_URL,

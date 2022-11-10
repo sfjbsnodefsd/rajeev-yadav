@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 require("dotenv").config();
 // const Pensioner_detail = require("./pensioner_detail");
 const isAuth = require("../auth_service/isAuth");
@@ -9,7 +10,14 @@ var client = new Client();
 const port = process.env.PORT || 6003;
 
 const app = express();
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(
+    cors({
+        origin: "*",
+        methods: "POST,GET,PUT,OPTIONS,DELETE",
+    })
+);
 
 mongoose.connect(
     process.env.DB_URL,
