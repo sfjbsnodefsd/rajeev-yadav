@@ -1,0 +1,138 @@
+<div
+  style="
+    padding: 30px;
+    border: 0px solid red;
+    display: flex;
+    justify-content: center;
+  "
+>
+  <form
+    style="align-items: center; width: 40%"
+    (submit)="onAddPensioner(pensionerForm)"
+    #pensionerForm="ngForm"
+  >
+    <div class="mb-3">
+      <label class="form-label" for="p_name">Pensioner Name</label>
+      <input
+        type="text"
+        name="p_name"
+        ngModel
+        required
+        placeholder=""
+        #p_name="ngModel"
+        class="form-control"
+      />
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="p_dob">DOB</label>
+      <input
+        type="text"
+        name="p_dob"
+        ngModel
+        required
+        placeholder=""
+        #p_dob="ngModel"
+        class="form-control"
+      />
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="p_pan">PAN</label>
+      <input
+        type="text"
+        name="p_pan"
+        ngModel
+        required
+        placeholder=""
+        #p_pan="ngModel"
+        class="form-control"
+      />
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="p_aadhar">AADHAR</label>
+      <input
+        type="text"
+        name="p_aadhar"
+        ngModel
+        required
+        placeholder=""
+        #p_aadhar="ngModel"
+        class="form-control"
+      />
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="p_sal_earned">Last Salary Earned</label>
+      <input
+        type="text"
+        name="p_sal_earned"
+        ngModel
+        required
+        placeholder=""
+        #p_sal_earned="ngModel"
+        class="form-control"
+      />
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="p_allowance">Allowance</label>
+      <input
+        type="text"
+        name="p_allowance"
+        ngModel
+        required
+        placeholder=""
+        #p_allowance="ngModel"
+        class="form-control"
+      />
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="p_pension_type">Penstion Type</label>
+      <input
+        type="text"
+        name="p_pension_type"
+        ngModel
+        required
+        placeholder=""
+        #p_pension_type="ngModel"
+        class="form-control"
+      />
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="p_bank_name">Bank Name</label>
+      <input
+        type="text"
+        name="p_bank_name"
+        ngModel
+        required
+        placeholder=""
+        #p_bank_name="ngModel"
+        class="form-control"
+      />
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="p_bank_acnt">Bank Account</label>
+      <input
+        type="text"
+        name="p_bank_acnt"
+        ngModel
+        required
+        placeholder=""
+        #p_bank_acnt="ngModel"
+        class="form-control"
+      />
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="p_bank_type">Bank Type</label>
+      <input
+        class="form-control"
+        type="text"
+        name="p_bank_type"
+        ngModel
+        required
+        placeholder=""
+        #p_bank_type="ngModel"
+      />
+    </div>
+    <div style="text-align: center" class="mb-3">
+      <button class="btn btn-primary" type="submit">Save Pensioner</button>
+    </div>
+  </form>
+</div>
