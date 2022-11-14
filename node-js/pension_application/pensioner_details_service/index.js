@@ -93,6 +93,22 @@ app.get("/pensioner/", isAuth, async (req, res) => {
         res.status(200).send({ success: 0, data: "NULL" });
     }
 });
+app.delete("/pensioner/:id", isAuth, async (req, res) => {
+    try {
+        const id = req.params.id;
+        console.log(id);
+        const details = await Pensioner_detail.deleteOne({_id:req.params.id});
+        if (!details) {
+            console.log("Error : Get details - No Data Found!");
+            res.status(200).send({ success: 0, data: "NULL" });
+        } else {
+            res.status(200).send({ success: 1, data: "Deleted Successfully" });
+        }
+    } catch (err) {
+        console.log("Error : Delete details", err);
+        res.status(200).send({ success: 0, data: "NULL" });
+    }
+});
 app.listen(port, () => {
     console.log(`P Details service is up and runnig on port ${port}`);
 });

@@ -11,8 +11,6 @@ const UserSchema = new mongoose.Schema({
     p_pan: {
         require: true,
         type: String,
-        minLength: 6,
-        maxLength: 6,
     },
     p_aadhar: {
         require: true,

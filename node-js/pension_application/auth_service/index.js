@@ -43,7 +43,7 @@ app.post("/pensioner/get_token", async (req, res) => {
                 { username, password, aadhar },
                 process.env.SECRET,
                 {
-                    expiresIn: "1800s",
+                    expiresIn: "86400s",
                 },
                 (err, token) => {
                     if (err) {
