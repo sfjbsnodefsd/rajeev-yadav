@@ -56,36 +56,9 @@ app.post("/mngmt/login", (req, res) => {
         res.status(500).send({ success: 0, data: "NULL" });
     }
 });
-app.get("/mngmt/get_pensioner", isAuth, async (req, res) => {
+app.get("/mngmt/get_pensioner_details/:aadhar", isAuth, async (req, res) => {
     try {
-        const aadhar = req.aadhar;
-        const token = req.headers["authorization"];
-        console.log(aadhar);
-        console.log(token);
-
-        const args = {
-            headers: {
-                authorization: token,
-            },
-        };
-        const url = `${process.env.GET_PENSION_DETAILS_URL}`;
-        // console.log(url);
-        client.get(url, args, function (result) {
-            // console.log(result);
-            if (result.success === 1) {
-                res.status(200).send({ success: 1, data: result.data });
-            } else {
-                res.status(200).send({ success: 0, data: "NULL" });
-            }
-        });
-    } catch (err) {
-        console.log("Error : Pension Managment service - Get pensioner", err);
-        res.status(500).send({ success: 0, data: "NULL" });
-    }
-});
-app.post("/mngmt/get_pensioner_details", isAuth, async (req, res) => {
-    try {
-        const aadhar = req.aadhar;
+        const aadhar = req.params.aadhar;
         const token = req.headers["authorization"];
         console.log(aadhar);
         console.log(token);
@@ -112,7 +85,7 @@ app.post("/mngmt/get_pensioner_details", isAuth, async (req, res) => {
 });
 app.post("/mngmt/process_pension", isAuth, async (req, res) => {
     try {
-        const aadhar = req.aadhar;
+        const aadhar = req.body.aadhar;
         const token = req.headers["authorization"];
         // console.log(aadhar);
         // console.log(token);
@@ -136,6 +109,33 @@ app.post("/mngmt/process_pension", isAuth, async (req, res) => {
         });
     } catch (err) {
         console.log("Error : Pension Managment service - Process pension", err);
+        res.status(500).send({ success: 0, data: "NULL" });
+    }
+});
+app.get("/mngmt/get_pensioner", isAuth, async (req, res) => {
+    try {
+        const aadhar = req.aadhar;
+        const token = req.headers["authorization"];
+        console.log(aadhar);
+        console.log(token);
+
+        const args = {
+            headers: {
+                authorization: token,
+            },
+        };
+        const url = `${process.env.GET_PENSION_DETAILS_URL}`;
+        // console.log(url);
+        client.get(url, args, function (result) {
+            // console.log(result);
+            if (result.success === 1) {
+                res.status(200).send({ success: 1, data: result.data });
+            } else {
+                res.status(200).send({ success: 0, data: "NULL" });
+            }
+        });
+    } catch (err) {
+        console.log("Error : Pension Managment service - Get pensioner", err);
         res.status(500).send({ success: 0, data: "NULL" });
     }
 });

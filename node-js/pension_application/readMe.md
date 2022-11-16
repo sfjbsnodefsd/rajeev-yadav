@@ -52,7 +52,7 @@
                 }
         2.2 Get pensioner Details
 
-            Endpoint : localhost:6001/pensioner/12345679
+            Endpoint : localhost:6001/pensioner/:aadhar
             Method : GET
             Res:
                 {
@@ -72,6 +72,56 @@
                         "\_\_v": 0
                     }
                 }
+        2.3  Get all pensioners
+
+            Endpoint : Endpoint : localhost:6001/pensioner/
+            Method : GET
+            Res :
+                {
+                    "success": 1,
+                    "data": [
+                        {
+                            "_id": "636a59733a8c5fb78fb41b7d",
+                            "p_name": "rajeev",
+                            "p_dob": "4-6-1957",
+                            "p_pan": "123456",
+                            "p_aadhar": 12345679,
+                            "p_sal_earned": 40000,
+                            "p_allowance": "150",
+                            "p_pension_type": "self",
+                            "p_bank_name": "SBI",
+                            "p_bank_acnt": "1234567",
+                            "p_bank_type": "public",
+                            "__v": 0
+                        },
+                        {
+                            "_id": "636a59a23a8c5fb78fb41b80",
+                            "p_name": "rajeev",
+                            "p_dob": "4-6-1957",
+                            "p_pan": "123456",
+                            "p_aadhar": 12345678,
+                            "p_sal_earned": 40000,
+                            "p_allowance": "150",
+                            "p_pension_type": "self",
+                            "p_bank_name": "SBI",
+                            "p_bank_acnt": "1234567",
+                            "p_bank_type": "public",
+                            "__v": 0
+                        }
+                    ]
+                }
+        2.4  Delete pensioner
+
+            Endpoint : Endpoint : localhost:6001/pensioner/:id
+            Method : DELETE
+            Res:
+                {
+                    "success": 1,
+                    "data": {
+                        "Deleted Succesfully"
+                    }
+                }
+
 
     3. Process Pension Micro Service
 
@@ -109,10 +159,9 @@
                 }
 
         4.2 Get pensioner details - [Using 2.2 Get pensioner Details internally]
-        
-            Endpoint : localhost:6003/mngmt/get_pensioner_details
-            Method : POST
-            Req : Aadhar passed internally after login
+
+            Endpoint : localhost:6003/mngmt/get_pensioner_details/:aadhar
+            Method : GET
             Res :
                 {
                     "success": 1,
@@ -136,13 +185,54 @@
 
             Endpoint : localhost:6003/mngmt/process_pension
             Method : POST
-            Req : Aadhar passed internally after login
-            Res: 
-            {
-                "success": 1,
-                "data": {
-                    "PensionAmount": 32150,
-                    "BankServiceCharge": 500
+            Req :
+                {
+                    "aadhar" : "12345679"
                 }
-            }
+            Res:
+                {
+                    "success": 1,
+                    "data": {
+                        "PensionAmount": 32150,
+                        "BankServiceCharge": 500
+                    }
+                }
 
+        4.4  Get all pensioners
+
+            Endpoint : localhost:6003/mngmt/get_pensioner
+            Method : GET
+            Res :
+                {
+                    "success": 1,
+                    "data": [
+                        {
+                            "_id": "636a59733a8c5fb78fb41b7d",
+                            "p_name": "rajeev",
+                            "p_dob": "4-6-1957",
+                            "p_pan": "123456",
+                            "p_aadhar": 12345679,
+                            "p_sal_earned": 40000,
+                            "p_allowance": "150",
+                            "p_pension_type": "self",
+                            "p_bank_name": "SBI",
+                            "p_bank_acnt": "1234567",
+                            "p_bank_type": "public",
+                            "__v": 0
+                        },
+                        {
+                            "_id": "636a59a23a8c5fb78fb41b80",
+                            "p_name": "rajeev",
+                            "p_dob": "4-6-1957",
+                            "p_pan": "123456",
+                            "p_aadhar": 12345678,
+                            "p_sal_earned": 40000,
+                            "p_allowance": "150",
+                            "p_pension_type": "self",
+                            "p_bank_name": "SBI",
+                            "p_bank_acnt": "1234567",
+                            "p_bank_type": "public",
+                            "__v": 0
+                        }
+                    ]
+                }
