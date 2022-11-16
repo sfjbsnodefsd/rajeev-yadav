@@ -3,9 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { Pensioner } from '../pensioner/pensioner.model';
 
-const BASE_URL = 'http://localhost:6003/mngmt/get_pensioner';
+const PENSION_MNGMT_SERVICE_URL = 'http://localhost:6003/mngmt';
 const GET_PENSIONER_URL = 'http://localhost:6001/pensioner';
-const ADD_PENSIONER_URL = 'http://localhost:6001/pensioner';
+const PENSIONER_URL = 'http://localhost:6001/pensioner';
 
 @Injectable({
   providedIn: 'root',
@@ -16,10 +16,10 @@ export class PensionService {
 
   public pensionersData: any;
 
-  token = `Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJhamVldiIsInBhc3N3b3JkIjoiYWRtaW5AMTIzIiwiYWFkaGFyIjoiMTIzNDU2NzgiLCJpYXQiOjE2Njg0MTE1NDUsImV4cCI6MTY2ODQ5Nzk0NX0.lOZRnYSHmt18E9W8gNJmKXaybedrJ1JkxIEY6w-fteM`;
+  token = `Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJhamVldiIsInBhc3N3b3JkIjoiYWRtaW5AMTIzIiwiYWFkaGFyIjoiMTIzNDU2NzgiLCJpYXQiOjE2Njg2MTA2MjMsImV4cCI6MTY2ODY5NzAyM30.zxFK_rvU37c59TxaXmL08ceRZWpLQOw8m4NHMz8gtyQ`;
   getPensioners() {
     this.http
-      .get(BASE_URL, {
+      .get(PENSION_MNGMT_SERVICE_URL + "/get_pensioner", {
         headers: new HttpHeaders().set('Authorization', this.token),
       })
       .subscribe((pensionersData: any) => {
@@ -32,6 +32,7 @@ export class PensionService {
     return this.pensionersUpdated.asObservable();
   }
   addPensioner(
+    _id: String,
     p_name: String,
     p_dob: String,
     p_pan: String,
@@ -44,6 +45,7 @@ export class PensionService {
     p_bank_type: String
   ) {
     const pensioner: Pensioner = {
+      _id: '',
       p_name,
       p_dob,
       p_pan,
@@ -55,20 +57,41 @@ export class PensionService {
       p_bank_acnt,
       p_bank_type,
     };
+    console.log(pensioner);
     this.http
-      .post(ADD_PENSIONER_URL, pensioner, {
+      .post(PENSIONER_URL, pensioner, {
         headers: new HttpHeaders().set('Authorization', this.token),
       })
-      .subscribe((responseData) => {
+      .subscribe((responseData: any) => {
         console.log(responseData);
+        pensioner._id = responseData.data._id;
+        console.log(pensioner);
         this.pensioners.push(pensioner);
         this.pensionersUpdated.next([...this.pensioners]);
       });
   }
-  viewPensiner(p: any) {
-    return this.http.get(GET_PENSIONER_URL + '/' + p.p_aadhar, {
+  deletePensioner(id: string) {
+    this.http
+      .delete(PENSIONER_URL + '/' + id, {
+        headers: new HttpHeaders().set('Authorization', this.token),
+      })
+      .subscribe((delRes: any) => {
+        console.log(delRes);
+        const updatedPensioner = this.pensioners.filter(
+          (pensioner) => pensioner._id !== id
+        );
+        this.pensioners = updatedPensioner;
+        this.pensionersUpdated.next([...this.pensioners]);
+      });
+  }
+  getPensioner(aadhar: number) {
+    return <Pensioner>{ ...this.pensioners.find((p) => p.p_aadhar == aadhar) };
+  }
+  viewPensiner(aadhar: string) {
+    console.log(aadhar)
+    return this.http.get(PENSION_MNGMT_SERVICE_URL + '/get_pensioner_details/' + aadhar, {
       headers: new HttpHeaders().set('Authorization', this.token),
     });
   }
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 }

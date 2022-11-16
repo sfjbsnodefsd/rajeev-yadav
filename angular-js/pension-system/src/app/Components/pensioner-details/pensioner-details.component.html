@@ -1,1 +1,53 @@
-<p>pensioner-details works!</p>
+<div
+  style="
+    padding: 30px;
+    border: 0px solid red;
+    display: flex;
+    justify-content: center;
+  "
+>
+<table class="table table-bordered table-striped table-hover" style="align-items: center; width: 40%;">
+  <tbody>
+    <tr>
+      <th scope="row">Name</th>
+      <td>{{ pensioner.p_name }}</td>
+    </tr>
+    <tr>
+      <th scope="row">DOB</th>
+      <td>{{ pensioner.p_dob }}</td>
+    </tr>
+    <tr>
+      <th scope="row">PAN</th>
+      <td>{{ pensioner.p_pan }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Aadhar</th>
+      <td>{{ pensioner.p_aadhar }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Last Salary Earned</th>
+      <td>{{ pensioner.p_sal_earned }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Allowance</th>
+      <td>{{ pensioner.p_allowance }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Pension Type</th>
+      <td>{{ pensioner.p_pension_type }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Bank Name</th>
+      <td>{{ pensioner.p_bank_name }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Bank Account</th>
+      <td>{{ pensioner.p_bank_acnt }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Bank Type</th>
+      <td>{{ pensioner.p_bank_type }}</td>
+    </tr>
+  </tbody>
+</table>
+</div>

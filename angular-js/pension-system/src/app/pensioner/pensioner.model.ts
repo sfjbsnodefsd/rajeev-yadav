@@ -1,4 +1,5 @@
 export interface Pensioner {
+  _id: String;
   p_name: String;
   p_dob: String;
   p_pan: String;

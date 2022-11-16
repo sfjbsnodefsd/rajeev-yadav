@@ -12,7 +12,7 @@ export class ListPensionerComponent implements OnInit, OnDestroy {
   apiRes: any;
   public pensioners: Pensioner[] = [];
   public pensionersSub: Subscription;
-  constructor(private pensioneService: PensionService) {}
+  constructor(private pensioneService: PensionService) { }
 
   ngOnInit(): void {
     this.getAllPensioner();
@@ -25,10 +25,13 @@ export class ListPensionerComponent implements OnInit, OnDestroy {
         this.pensioners = pensioners;
       });
   }
+  onDelete(id: any) {
+    this.pensioneService.deletePensioner(id);
+  }
   viewPensioner(p: any): void {
     const viewData = this.pensioneService.viewPensiner(p);
     viewData.subscribe((response) => {
-      // console.log(response);
+      console.log(response);
       this.apiRes = response;
       if (this.apiRes.success == 1) {
         console.log(this.apiRes.data);
