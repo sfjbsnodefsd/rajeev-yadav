@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { Pensioner } from '../pensioner/pensioner.model';
+import { Router } from '@angular/router';
 
 const PENSION_MNGMT_SERVICE_URL = 'http://localhost:6003/mngmt';
-const GET_PENSIONER_URL = 'http://localhost:6001/pensioner';
 const PENSIONER_URL = 'http://localhost:6001/pensioner';
 
 @Injectable({
@@ -15,8 +15,9 @@ export class PensionService {
   public pensionersUpdated = new Subject<Pensioner[]>();
 
   public pensionersData: any;
+  constructor(private http: HttpClient, private router: Router) { }
 
-  token = `Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJhamVldiIsInBhc3N3b3JkIjoiYWRtaW5AMTIzIiwiYWFkaGFyIjoiMTIzNDU2NzgiLCJpYXQiOjE2Njg2MTA2MjMsImV4cCI6MTY2ODY5NzAyM30.zxFK_rvU37c59TxaXmL08ceRZWpLQOw8m4NHMz8gtyQ`;
+  token = `Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJhamVldiIsInBhc3N3b3JkIjoiYWRtaW5AMTIzIiwiYWFkaGFyIjoiMTIzNDU2NzgiLCJpYXQiOjE2Njg3MTIyNDUsImV4cCI6MTY2ODc5ODY0NX0.UoBv2sxWL2TTP5yAOmamtGXCwo_SJ722m4qBN5OA6l0`;
   getPensioners() {
     this.http
       .get(PENSION_MNGMT_SERVICE_URL + "/get_pensioner", {
@@ -68,6 +69,7 @@ export class PensionService {
         console.log(pensioner);
         this.pensioners.push(pensioner);
         this.pensionersUpdated.next([...this.pensioners]);
+        this.router.navigate(['list_pensioner'])
       });
   }
   deletePensioner(id: string) {
@@ -84,14 +86,17 @@ export class PensionService {
         this.pensionersUpdated.next([...this.pensioners]);
       });
   }
-  getPensioner(aadhar: number) {
-    return <Pensioner>{ ...this.pensioners.find((p) => p.p_aadhar == aadhar) };
-  }
-  viewPensiner(aadhar: string) {
+  viewPensioner(aadhar: number) {
     console.log(aadhar)
     return this.http.get(PENSION_MNGMT_SERVICE_URL + '/get_pensioner_details/' + aadhar, {
       headers: new HttpHeaders().set('Authorization', this.token),
     });
   }
-  constructor(private http: HttpClient) { }
+  processPensioner(aadhar: number) {
+    console.log(aadhar)
+    return this.http.post(PENSION_MNGMT_SERVICE_URL + '/process_pension', { "aadhar": aadhar }, {
+      headers: new HttpHeaders().set('Authorization', this.token),
+    });
+  }
+
 }

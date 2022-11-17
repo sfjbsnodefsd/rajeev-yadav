@@ -32,7 +32,7 @@
         <td>{{ p.p_bank_name }}</td>
         <td>{{ p.p_bank_type }}</td>
         <td>
-          <a  class="btn btn-outline-primary" [routerLink]="['/view_pensioner',p.p_aadhar]"><svg
+          <a  class="btn btn-sm btn-outline-primary" [routerLink]="['/view_pensioner',p.p_aadhar]"><svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
             height="16"
@@ -47,9 +47,10 @@
               d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"
             />
           </svg>Details</a>
+          &nbsp;
           <button
             type="button"
-            class="btn btn-outline-danger"
+            class="btn btn-sm btn-outline-danger"
             (click)="onDelete(p._id)"
           >
             <svg

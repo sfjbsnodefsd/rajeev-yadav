@@ -17,19 +17,7 @@ export class AddPensionerComponent implements OnInit {
 
   constructor(private pensioneService: PensionService, public route: ActivatedRoute) { }
 
-  ngOnInit(): void {
-    this.route.paramMap.subscribe((paramMap: ParamMap) => {
-      if (paramMap.has('pensionerId')) {
-        this.mode = 'edit';
-        this.pensionerId = paramMap.get('pensionerId');
-        this.pensioner = this.pensioneService.getPensioner(this.pensionerId)
-      } else {
-        this.mode = 'create';
-        this.pensionerId = '';
-      }
-    })
-  }
-
+  ngOnInit(): void { }
 
   onAddPensioner(form: NgForm) {
     // console.log(form.value.p_name)

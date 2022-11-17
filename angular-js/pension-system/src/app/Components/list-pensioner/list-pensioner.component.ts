@@ -28,19 +28,7 @@ export class ListPensionerComponent implements OnInit, OnDestroy {
   onDelete(id: any) {
     this.pensioneService.deletePensioner(id);
   }
-  viewPensioner(p: any): void {
-    const viewData = this.pensioneService.viewPensiner(p);
-    viewData.subscribe((response) => {
-      console.log(response);
-      this.apiRes = response;
-      if (this.apiRes.success == 1) {
-        console.log(this.apiRes.data);
-        this.pensioners = this.apiRes.data;
-      } else {
-        this.pensioners = [];
-      }
-    });
-  }
+
   ngOnDestroy(): void {
     this.pensionersSub.unsubscribe();
   }

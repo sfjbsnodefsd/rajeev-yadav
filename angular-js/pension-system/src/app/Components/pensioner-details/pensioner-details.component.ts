@@ -10,23 +10,41 @@ import { Pensioner } from 'src/app/pensioner/pensioner.model';
 })
 export class PensionerDetailsComponent implements OnInit {
   private aadhar: number;
-  public pensioner: Pensioner
+  public pensioner: Pensioner;
+  apiRes: any;
+  processPension: any;
+  PensionAmount: any;
+  BankServiceCharge: any;
   constructor(private pensioneService: PensionService, public route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('aadhar')) {
         this.aadhar = <any>paramMap.get('aadhar');
-        this.pensioner = this.pensioneService.getPensioner(this.aadhar);
-        console.log("view=====")
-        console.log(this.pensioner)
+        this.pensioneService.viewPensioner(this.aadhar).subscribe((response) => {
+          console.log(response);
+          this.apiRes = response;
+          if (this.apiRes.success == 1) {
+            console.log(this.apiRes.data);
+            this.pensioner = this.apiRes.data;
+          }
+        });
       }
     });
   }
-  getAllPensioner(): void {
-    const d = this.pensioneService.getPensioners();
-    console.log(d);
-    console.log('Heteeee');
-    // this.router.navigate([""])
+  calculataPension(aadhar: any) {
+    console.log(aadhar);
+    this.pensioneService.processPensioner(this.aadhar).subscribe((response) => {
+      console.log(response);
+      this.processPension = response;
+      if (this.processPension.success == 1) {
+        this.PensionAmount = this.processPension.data.PensionAmount;
+        this.BankServiceCharge = this.processPension.data.BankServiceCharge;
+        console.log(this.PensionAmount);
+      } else {
+        this.PensionAmount = 0;
+        this.BankServiceCharge = 0;
+      }
+    });
   }
 }

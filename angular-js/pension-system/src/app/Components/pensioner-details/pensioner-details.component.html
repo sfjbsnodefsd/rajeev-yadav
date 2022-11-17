@@ -1,53 +1,86 @@
 <div
   style="
-    padding: 30px;
+    padding: 20px;
     border: 0px solid red;
     display: flex;
     justify-content: center;
+    align-items: flex-start;
   "
 >
-<table class="table table-bordered table-striped table-hover" style="align-items: center; width: 40%;">
+<table class="table table-bordered table-striped table-hover" style="align-items: center; width: 30%;margin:10px;">
   <tbody>
     <tr>
+      <th colspan="2" style="text-align: center;">Personal Details</th>
+    </tr>
+    <tr>
       <th scope="row">Name</th>
-      <td>{{ pensioner.p_name }}</td>
+      <td>{{ pensioner?.p_name }}</td>
     </tr>
     <tr>
       <th scope="row">DOB</th>
-      <td>{{ pensioner.p_dob }}</td>
+      <td>{{ pensioner?.p_dob }}</td>
     </tr>
     <tr>
       <th scope="row">PAN</th>
-      <td>{{ pensioner.p_pan }}</td>
+      <td>{{ pensioner?.p_pan }}</td>
     </tr>
     <tr>
       <th scope="row">Aadhar</th>
-      <td>{{ pensioner.p_aadhar }}</td>
+      <td>{{ pensioner?.p_aadhar }}</td>
     </tr>
     <tr>
       <th scope="row">Last Salary Earned</th>
-      <td>{{ pensioner.p_sal_earned }}</td>
+      <td>{{ pensioner?.p_sal_earned }}</td>
     </tr>
     <tr>
       <th scope="row">Allowance</th>
-      <td>{{ pensioner.p_allowance }}</td>
+      <td>{{ pensioner?.p_allowance }}</td>
+    </tr>
+
+    <tr>
+      <td colspan="2" style="text-align: center;"><button
+        type="button"
+        class="btn btn-outline-success"
+        [routerLink]="['/list_pensioner']"
+      >List pensioner</button></td>
+
+    </tr>
+  </tbody>
+</table>
+<table class="table table-bordered table-striped table-hover " style=" width: 30%;margin:10px;">
+  <tbody>
+    <tr>
+      <th colspan="2" style="text-align: center;">Pension Details</th>
     </tr>
     <tr>
       <th scope="row">Pension Type</th>
-      <td>{{ pensioner.p_pension_type }}</td>
+      <td>{{ pensioner?.p_pension_type }}</td>
     </tr>
     <tr>
       <th scope="row">Bank Name</th>
-      <td>{{ pensioner.p_bank_name }}</td>
+      <td>{{ pensioner?.p_bank_name }}</td>
     </tr>
     <tr>
       <th scope="row">Bank Account</th>
-      <td>{{ pensioner.p_bank_acnt }}</td>
+      <td>{{ pensioner?.p_bank_acnt }}</td>
     </tr>
     <tr>
       <th scope="row">Bank Type</th>
-      <td>{{ pensioner.p_bank_type }}</td>
+      <td>{{ pensioner?.p_bank_type }}</td>
     </tr>
+    <tr class="table-success" *ngIf="PensionAmount > 0;">
+      <th scope="row">Pension Amount</th>
+      <td>{{ PensionAmount }}</td>
+    </tr>
+    <tr class="table-success" *ngIf="PensionAmount > 0;">
+      <th scope="row">Bank Service Charge</th>
+      <td>{{ BankServiceCharge }}</td>
+    </tr>
+    <tr><td colspan="2" style="text-align: center;"><button
+      type="button"
+      class="btn btn-outline-success"
+      (click)="calculataPension(pensioner?.p_aadhar)"
+    >Process Pension</button></td></tr>
   </tbody>
 </table>
 </div>
