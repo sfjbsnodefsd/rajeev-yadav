@@ -1,0 +1,22 @@
+<div
+  style="
+    padding: 20px;
+    border: 0px solid red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+  "
+>
+<form (submit)="onLogin(loginForm)" #loginForm="ngForm" style="border: 1px solid green;width:40%;padding: 50px;border-radius: 10px;">
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">User Name</label>
+    <input type="username" name="username"  ngModel class="form-control"  aria-describedby="emailHelp">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Password</label>
+    <input type="password" name="password"  ngModel class="form-control" >
+  </div>
+  <button type="submit" class="btn btn-primary">Login</button>
+</form>
+</div>

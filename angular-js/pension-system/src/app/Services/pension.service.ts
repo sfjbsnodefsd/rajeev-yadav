@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { Pensioner } from '../pensioner/pensioner.model';
 import { Router } from '@angular/router';
+import { AuthService } from './auth.service';
 
 const PENSION_MNGMT_SERVICE_URL = 'http://localhost:6003/mngmt';
 const PENSIONER_URL = 'http://localhost:6001/pensioner';
@@ -15,14 +16,12 @@ export class PensionService {
   public pensionersUpdated = new Subject<Pensioner[]>();
 
   public pensionersData: any;
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private authService: AuthService) { }
 
   token = `Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJhamVldiIsInBhc3N3b3JkIjoiYWRtaW5AMTIzIiwiYWFkaGFyIjoiMTIzNDU2NzgiLCJpYXQiOjE2Njg3MTIyNDUsImV4cCI6MTY2ODc5ODY0NX0.UoBv2sxWL2TTP5yAOmamtGXCwo_SJ722m4qBN5OA6l0`;
   getPensioners() {
     this.http
-      .get(PENSION_MNGMT_SERVICE_URL + "/get_pensioner", {
-        headers: new HttpHeaders().set('Authorization', this.token),
-      })
+      .get(PENSION_MNGMT_SERVICE_URL + "/get_pensioner")
       .subscribe((pensionersData: any) => {
         this.pensioners = pensionersData.data;
         console.log(this.pensioners);

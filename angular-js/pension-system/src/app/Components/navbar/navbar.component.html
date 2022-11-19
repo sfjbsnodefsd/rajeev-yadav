@@ -19,7 +19,7 @@
             >Home</a
           >
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="userLogedIn">
           <a class="nav-link" routerLink="list_pensioner" href="#"
             >ListPensioner</a
           >
@@ -29,15 +29,20 @@
             >PensionerDetails</a
           >
         </li> -->
-        <!-- <li class="nav-item">
+        <li class="nav-item" *ngIf="userLogedIn">
           <a class="nav-link" routerLink="add_pensioner" href="#"
             >AddPensioner</a
           >
-        </li> -->
+        </li>
       </ul>
-      <form class="">
-        <button class="btn btn-outline-success" type=""><a class="nav-link" routerLink="add_pensioner" href="#"
-          >AddPensioner</a
+      <form class="" *ngIf="!userLogedIn">
+        <button class="btn btn-outline-success" type="">
+          <a class="nav-link" routerLink="login" href="#">Login</a
+        ></button>
+      </form>
+      <form class="" *ngIf="userLogedIn">
+        <button class="btn btn-outline-success" type="">
+          <a class="nav-link" (click)="onLogout()">Logout</a
         ></button>
       </form>
     </div>
