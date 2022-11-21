@@ -10,12 +10,12 @@ const LOGIN_URL = 'http://localhost:6003/mngmt/login';
 
 export class AuthService {
   response: any;
-  private token: string;
+  private token: any;
+  private isAuthenticated = false;
   private authStatusListener = new Subject<boolean>()
   constructor(private http: HttpClient, private router: Router) { }
 
   getToken() {
-
     console.log(this.token);
     return this.token;
   }
@@ -27,13 +27,37 @@ export class AuthService {
     this.http.post(LOGIN_URL, authData).subscribe((response: any) => {
       console.log(response);
       this.token = response.data;
+      this.isAuthenticated = true;
       this.authStatusListener.next(true);
+      this.saveAuthData(this.token);
       this.router.navigate(['list_pensioner'])
     })
+  }
+  getIsAuth() {
+    return this.isAuthenticated;
   }
   logout() {
     this.token = '';
     this.authStatusListener.next(false);
+    this.clearAuthData();
+    this.isAuthenticated = false;
     this.router.navigate(['login'])
+  }
+
+  private saveAuthData(token: string) {
+    localStorage.setItem("token", token)
+  }
+  private clearAuthData() {
+    console.log("Clear local storage");
+    localStorage.removeItem("token")
+  }
+  private getAuthData() {
+    return localStorage.getItem("token");
+  }
+  autoAuthUser() {
+    const token = this.getAuthData();
+    this.token = token;
+    this.isAuthenticated = true;
+    this.authStatusListener.next(true)
   }
 }
