@@ -1,13 +1,22 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
+const cors = require("cors");
 require("dotenv").config();
 const User = require("./user");
 
 const port = process.env.PORT || 6000;
 
+
 const app = express();
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(
+    cors({
+        origin: "*",
+        methods: "POST,GET,PUT,OPTIONS,DELETE",
+    })
+);
 
 mongoose.connect(
     process.env.DB_URL,
@@ -25,7 +34,7 @@ mongoose.connect(
 app.post("/pensioner/get_token", async (req, res) => {
     try {
         const { username, password } = req.body;
-        // console.log(username, password);
+        console.log(username, password);
         const user = await User.findOne({ username, password });
         if (!user) {
             console.log("Error : No Record Found");
