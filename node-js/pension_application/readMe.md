@@ -1,3 +1,20 @@
+    Pensionser Application Backend
+
+    Prerequisite: 
+
+    1.Start Services
+        1.pension_application\auth_service =>  node index.js
+        2.pension_application\pensioner_details_service => node index.js 
+        3.pension_application\process_pension_service => node index.js
+        4.pension_application\pension_mngmt_service => node index.js
+
+    2.Start DB
+        > mongo
+        > mongod
+        
+
+    Backend Services
+
     1. Auth Micro Service
 
         Endpoint : localhost:6000/pensioner/get_token
