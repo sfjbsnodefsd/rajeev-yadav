@@ -26,11 +26,15 @@ export class AuthService {
     const authData: Authdata = { username, password };
     this.http.post(LOGIN_URL, authData).subscribe((response: any) => {
       console.log(response);
-      this.token = response.data;
-      this.isAuthenticated = true;
-      this.authStatusListener.next(true);
-      this.saveAuthData(this.token);
-      this.router.navigate(['list_pensioner'])
+      if (response.success == 1) {
+        this.token = response.data;
+        this.isAuthenticated = true;
+        this.authStatusListener.next(true);
+        this.saveAuthData(this.token);
+        this.router.navigate(['list_pensioner'])
+      } else {
+
+      }
     })
   }
   getIsAuth() {
